@@ -1,0 +1,8 @@
+container {
+	z-index: 1;
+}
+
+#bg {
+	border: none;
+	z-index: 0;
+}
