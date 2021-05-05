@@ -1,4 +1,13 @@
-container {
+body, html {
+	overflow: hidden;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #fff;
+	font-size: 1.5em;
+	background: #000000;
+}
+
+
+canvas {
 	z-index: 1;
 }
 
