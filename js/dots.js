@@ -34,7 +34,7 @@
 
   setInterval( function() {
     context.clearRect( 0, 0, w, h );
-    context.fillStyle = 'rgba(0,255,255,.5)';
+    context.fillStyle = 'rgba(255,255,255,1)';
     context.globalCompositeOperation = 'lighter';
     t += .1;
     var wi = Math.floor(w / d);
