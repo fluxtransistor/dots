@@ -75,8 +75,8 @@
             xoff = 0,
             yoff = 0;
 
-        xoff += sin(0.5*t+x);
-        yoff += sin(0.5*t+y);
+        xoff += 3*sin(0.5*t+x);
+        yoff += 3*sin(0.5*t+y);
 
         switch (action) {
           case 'bounce':
