@@ -62,7 +62,7 @@
     if ((actionStart + actionTime) <= t) {
       action = '',
       actionTime = 0,
-      actionStart = 0
+      actionStart = 0;
     }
 
     while( wi-- ) {
@@ -85,13 +85,16 @@
             break;
         }
 
-        if (Math.abs(x + xoff - cx) < 200 && Math.abs(y + yoff - cy) < 200) {
-          xoff += 20* sin(PI*(x + xoff - cx)/200) * (1 - Math.abs(y + yoff - cy)/200)**2;
-          yoff += 20* sin(PI*(y + yoff - cy)/200) * (1 - Math.abs(x + xoff - cx)/200)**2;
+        var dist = Math.sqrt(((x+xoff - cx)**2) + ((y+yoff - cy)**2));
+
+        if (dist <= 200) {
+          xoff += 30* sin(PI*(x + xoff - cx)/200) * ((200 - dist)/200)**2;
+          yoff += 30* sin(PI*(y + yoff - cy)/200) * ((200 - dist)/200)**2;
         }
 
-        if (-5 < x + xoff < wi + 5 && -5 < y + yoff < hi + 5)
+        //if (-5 < x + xoff < wi + 5 && -5 < y + yoff < hi + 5) {
         context.fillRect(x + xoff, y + yoff, 5,5);
+        //}
 
       }
   	}
