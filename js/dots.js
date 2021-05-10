@@ -52,6 +52,8 @@
       }
   }
 
+
+
   setInterval( function() {
     context.clearRect( 0, 0, w, h );
     context.fillStyle = 'rgba(255,255,255,1)';
@@ -65,34 +67,57 @@
       actionStart = 0
     }
 
+    var shape = new Path2D();
+    shape.rect(10, 20, 150, 100);
+
     while( wi-- ) {
 
       hi = Math.floor(h / d);
       while( hi-- ) {
+
+
 
         var x = wi*d + (w % d),
             y = hi*d + (h % d),
             xoff = 0,
             yoff = 0;
 
-        xoff += 3*sin(0.5*t+x);
-        yoff += 3*sin(0.5*t+y);
-
-        switch (action) {
-          case 'bounce':
-            var progress = ((t - actionStart) / actionTime);
-            yoff -= 35 * (4 * progress * (1-progress));
-            break;
+        found = false;
+        for (var sx = 10; sx >= -10; sx--) {
+          if (!found) {
+            for (var sy = 10; sy >= -10; sx--) {
+              if (context.isPointInPath(shape, x + sx, y + sy, "nonzero")) {
+                found = true;
+                break;
+              }
+            }
+          }
         }
 
-        if (Math.abs(x + xoff - cx) < 200 && Math.abs(y + yoff - cy) < 200) {
-          xoff += 20* sin(PI*(x + xoff - cx)/200) * (1 - Math.abs(y + yoff - cy)/200)**2;
-          yoff += 20* sin(PI*(y + yoff - cy)/200) * (1 - Math.abs(x + xoff - cx)/200)**2;
+        if (!found) {
+          xoff = sx;
+          yoff = sy;
+        } else {
+
+          xoff += 3*sin(0.5*t+x);
+          yoff += 3*sin(0.5*t+y);
+
+          switch (action) {
+            case 'bounce':
+              var progress = ((t - actionStart) / actionTime);
+              yoff -= 35 * (4 * progress * (1-progress));
+              break;
+          }
+
+          if (Math.abs(x + xoff - cx) < 200 && Math.abs(y + yoff - cy) < 200) {
+            xoff += 20* sin(PI*(x + xoff - cx)/200) * (1 - Math.abs(y + yoff - cy)/200)**2;
+            yoff += 20* sin(PI*(y + yoff - cy)/200) * (1 - Math.abs(x + xoff - cx)/200)**2;
+          }
         }
 
-        if (0 < x + xoff < wi )
+        if (0 < x + xoff < wi) {
         context.fillRect(x + xoff, y + yoff, 5,5);
-
+        }
       }
   	}
 
