@@ -57,7 +57,7 @@
     context.fillStyle = 'rgba(255,255,255,1)';
     context.globalCompositeOperation = 'lighter';
     t += .1;
-    var wi = Math.floor(w / d);
+    var wi = Math.floor(w / d) + 1;
 
     if ((actionStart + actionTime) <= t) {
       action = '',
@@ -90,7 +90,7 @@
           yoff += 20* sin(PI*(y + yoff - cy)/200) * (1 - Math.abs(x + xoff - cx)/200)**2;
         }
 
-        if (0 < x + xoff < wi )
+        if (-5 < x + xoff < wi + 5 && -5 < y + yoff < hi + 5)
         context.fillRect(x + xoff, y + yoff, 5,5);
 
       }
